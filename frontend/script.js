@@ -1,8 +1,24 @@
-function checkBackend() {
-    document.getElementById("status").innerHTML =
-        "Backend connection will be added using AWS Amplify API";
-}
+ async function checkBackend() {
 
+    const url = "https://j5f6wdfwxojtzaix3o5u2ap2my0ddfwu.lambda-url.us-east-1.on.aws/";
+
+    try {
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        document.getElementById("status").innerHTML = data.body;
+
+    } catch (error) {
+
+        document.getElementById("status").innerHTML =
+            "Backend connection failed";
+
+        console.error(error);
+
+    }
+
+}
 
 function loadEmployees() {
 
@@ -24,7 +40,6 @@ function loadEmployees() {
 
     });
 }
-
 
 function loadProducts() {
 
